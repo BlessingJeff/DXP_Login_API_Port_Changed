@@ -1,0 +1,58 @@
+{
+  "name": "dxpdex",
+  "version": "0.7.9",
+  "description": "Package for work with DxpChain DEX",
+  "main": "lib",
+  "bin": {
+    "dxpdex": "./cli.js"
+  },
+  "scripts": {
+    "dev": "nodemon --exec yarn build --watch src",
+    "prebuild": "rm -rf lib",
+    "build": "babel src -d lib",
+    "postbuild": "yarn browserify",
+    "prebrowserify": "rm -rf build",
+    "browserify": "browserify lib/index.js --standalone DxpChain -o build/dxpdex.js -d",
+    "postbrowserify": "minify build/dxpdex.js -o build/dxpdex.min.js",
+    "test": "mocha --timeout 10000",
+    "style": "prettier --check src",
+    "style-all": "prettier --check src packages/api/src packages/ecc/src packages/serializer/src"
+  },
+  "keywords": [
+    "dxpchain"
+  ],
+  "author": "scientistnik",
+  "license": "MIT",
+  "prettier": {
+    "arrowParens": "avoid"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.7.4",
+    "assert": "^1.5.0",
+    "bcrypt": "^5.1.0",
+    "bigi": "^1.4.2",
+    "bignumber.js": "^7.2.1",
+    "bytebuffer": "^5.0.1",
+    "cors": "^2.8.5",
+    "dxpdex": "^0.7.9",
+    "dxpdex-api": "^0.7.2",
+    "dxpdex-ecc": "^0.7.0",
+    "dxpdex-serializer": "^0.7.7",
+    "express": "^4.18.2",
+    "lzma": "^2.3.2",
+    "mocha": "^10.1.0",
+    "nodemon": "^2.0.20",
+    "safe-buffer": "^5.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "babel-minify": "^0.5.1",
+    "browserify": "^16.5.0",
+    "dotenv": "^6.0.0",
+    "prettier": "2.6.1"
+  }
+}
